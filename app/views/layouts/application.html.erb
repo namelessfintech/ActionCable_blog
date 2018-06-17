@@ -34,7 +34,7 @@
     <div class="container">
     </header>
     <% flash.each do |key,message| %>
-      <div "text-center alert alert- <% key == 'notice'? 'success': 'danger' %>">
+      <div "text-center alert alert-primary <%= key == 'notice'? 'success': 'danger' %>">
         <% message %>
       </div>
     <% end %>
