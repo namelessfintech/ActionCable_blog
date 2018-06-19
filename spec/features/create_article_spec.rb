@@ -1,7 +1,5 @@
 require 'rails_helper'
 
-
-
 RSpec.feature "Creating Articles" do
 
   # Here we need to create a user to test association
