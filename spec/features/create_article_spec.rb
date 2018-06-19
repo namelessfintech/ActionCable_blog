@@ -1,7 +1,14 @@
 require 'rails_helper'
 
 
+
 RSpec.feature "Creating Articles" do
+
+  # Here we need to create a user to test association
+    before do
+      @pablo = User.create!(email: "pablo@example.com", password: "password")
+      login_as(@pablo)
+    end
 
     scenario "A user creates a new article" do
       visit "/"
@@ -12,8 +19,12 @@ RSpec.feature "Creating Articles" do
 
       click_button "Create Article"
 
+
+      expect(Article.last.user).to eq(@pablo)
       expect(page).to have_content("Article has been created")
       expect(page.current_path).to eq(articles_path)
+
+      expect(page).to have_content("Created by: #{@pablo.email}")
     end
 
   scenario "A user fails to create a new article" do
