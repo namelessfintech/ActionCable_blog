@@ -1,9 +1,21 @@
 <div class="container">
 
+<!-- In order to use the grid we must wrap everything inside of a row -->
+  <div class="row">
+      <div class="col-md-4 text-right">
+      <%= image_tag(@user.profile.avatar_url(:thumb).to_s, class:"img-circle") %>
 
- <%= image_tag(@user.profile.avatar_url(:thumb).to_s, class:"img-circle") %>
-  <br>
-  Name: <%= @user.profile.first_name %>
-  <%= @user.profile.last_name %>
+      </div>
+    <div class="col-md-8 text-left">
 
+      <h1> Name: <%= @user.profile.first_name %>
+         <%= @user.profile.last_name %></h1>
+
+         <div class="well">
+          <strong>Bio: </strong> <%= @user.profile.bio %></p>
+         </div>
+
+     </div>
+   </div>
+  </div>
 </div>
