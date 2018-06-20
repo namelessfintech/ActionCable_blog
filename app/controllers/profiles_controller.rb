@@ -20,6 +20,12 @@ class ProfilesController < ApplicationController
     @user = find_user
   end
 
+  def edit
+    @user = find_user
+    @profile = @user.profile
+
+  end
+
 
   private
 
