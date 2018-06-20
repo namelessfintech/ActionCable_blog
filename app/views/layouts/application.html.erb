@@ -27,8 +27,7 @@
     </div>
     <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li class="active"><%= link_to "New Author", new_user_profile_path(current_user) %></li>
-
+        <li class="active"><%= link_to "Edit Author", new_user_profile_path(current_user) if current_user %></li>
         <% if user_signed_in? %>
           <li><%= link_to "Sign out",destroy_user_session_path, method: :delete %></li>
         <% else %>
