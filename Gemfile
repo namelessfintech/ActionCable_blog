@@ -16,7 +16,9 @@ gem 'devise'
 
 gem 'bootstrap-sass'
 
-gem 'carrierwave', '~> 1.0'
+gem 'carrierwave'
+
+gem 'mini_magick'
 
 gem 'autoprefixer-rails'
 # Use Uglifier as compressor for JavaScript assets
