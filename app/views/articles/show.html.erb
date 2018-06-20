@@ -12,6 +12,10 @@
       <%= @article.body %>
     </div>
 
+    <p class="">
+      <%= link_to gravatar_for(@article.user), articles_path %>
+    </p>
+
     <% if user_signed_in? && current_user == @article.user %>
       <div class="edit-delete">
         <%= link_to "Edit Article", edit_article_path(@article), class: "btn btn-primary btn-lg btn-space pull-right"%>
