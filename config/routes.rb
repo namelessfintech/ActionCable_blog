@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     resource :profile
   end
 
+  get "/profiles", to: "profiles#index", as: "profiles"
+
   resources :articles do
     resources :comments
   end

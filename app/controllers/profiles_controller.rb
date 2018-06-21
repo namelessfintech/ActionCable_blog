@@ -3,7 +3,17 @@ class ProfilesController < ApplicationController
   # before_action :only_current_user
 
   def index
-    @users = User.all
+    if params[:name] && params[:name] != ""
+      names = params[:name].split(" ")
+      f_name = "%#{names.first}%"
+      l_name = "%#{names.last}%"
+      @profiles = Profile.where("first_name LIKE ? OR last_name LIKE ?", f_name, l_name)
+      if @profiles.count == 1
+        redirect_to user_profile_path(@profiles.first)
+      end
+    else
+      @profiles = Profile.all
+    end
   end
 
   def new
