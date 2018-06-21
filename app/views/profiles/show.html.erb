@@ -3,7 +3,7 @@
 <!-- In order to use the grid we must wrap everything inside of a row -->
   <div class="row">
       <div class="col-md-2 text-right">
-        <% if @user.profile.avatar %>
+        <% if @user.profile && @user.profile.avatar %>
           <%= image_tag(@user.profile.avatar_url(:thumb).to_s, class:"img-circle") %>
         <% end %>
       </div>
