@@ -12,18 +12,9 @@ class User < ApplicationRecord
   validates :email, presence: true,length:{maximum: 64},
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
-  after_create :create_chatroom
-
 
   def full_name
     "#{self.profile.first_name}" + " " + "#{self.profile.last_name}"
-  end
-
-  private
-
-  def create_chatroom
-    hyphenated_username = self.full_name.split.join("-")
-    Room.create(name: hyphenated_username, user_id: self.id)
   end
 
 
