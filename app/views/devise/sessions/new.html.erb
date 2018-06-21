@@ -1,13 +1,14 @@
 <div class="container">
 
 <h2  class="text-center">Log in</h2>
+<hr>
 
 <%= form_for(resource, as: resource_name, :html => {class:'form-horizontal', role: "form"}, url: session_path(resource_name)) do |f| %>
   <div class="form-group">
     <div class="control-label col-md-3">
     <%= f.label :email %><br />
     </div>
-    <div class="col-md-9">
+    <div class="col-md-6 offset">
     <%= f.email_field :email, class:'form-control', autofocus: true, autocomplete: "email" %>
     </div>
   </div>
@@ -16,7 +17,7 @@
     <div class="control-label col-md-3">
     <%= f.label :password %><br />
     </div>
-    <div class="col-md-9">
+    <div class="col-md-6 offset-4">
     <%= f.password_field :password, class: 'form-control', autocomplete: "off" %>
   </div>
   </div>

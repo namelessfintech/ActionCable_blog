@@ -2,6 +2,10 @@ class ProfilesController < ApplicationController
   before_action :authenticate_user!
   before_action :only_current_user
 
+  def index
+    @users = User.all
+  end
+
   def new
     @user = find_user
     @profile = Profile.new
@@ -20,6 +24,7 @@ class ProfilesController < ApplicationController
 
   def show
     @user = find_user
+    @users = User.all
   end
 
   def edit

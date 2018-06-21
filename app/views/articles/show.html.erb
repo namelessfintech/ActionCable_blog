@@ -1,7 +1,13 @@
 <div class="container">
   <article class="detail-article">
 
-    <h1 class="article-detail-title" style="text-align: center;"><%= @article.title %></h1>
+    <div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <  <h1 class="article-detail-title" style="text-align: center;"><%= @article.title %></h1>
+  </div>
+</div>
+
+
     <div class="glyphicon glyphicon-calendar" id="article-date">
       <%= @article.created_at.strftime("%b %d %Y") %>
     </div>
@@ -11,10 +17,13 @@
     <div class="article-body">
       <%= @article.body %>
     </div>
+    <br>
 
-    <p class="">
-      <%= link_to gravatar_for(@article.user), articles_path %>
-    </p>
+    <div class="">
+     <%= image_tag(@profile.avatar_url(:thumb).to_s, class:"img-circle")   %>
+    </div>
+    <small>Created by: <%= @profile.first_name%> <%= @profile.last_name%></small>
+
 
     <% if user_signed_in? && current_user == @article.user %>
       <div class="edit-delete">
@@ -53,7 +62,7 @@
           <%= f.label :body, "New Comment" %>
         </div>
         <div class="col-md-10">
-          <%= f.text_area :body, rows:10, class:'form-control', placeholder: 'Your comment' %>
+          <%= f.text_area :body, rows:10, class:'form-control', placeholder: 'Your comment', autoclear: true %>
         </div>
       </div>
 

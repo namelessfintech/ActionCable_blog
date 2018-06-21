@@ -4,6 +4,7 @@ class ArticlesController < ApplicationController
 
   def index
     @articles = Article.all
+
   end
 
   def new
@@ -25,6 +26,7 @@ class ArticlesController < ApplicationController
   def show
     @comment = @article.comments.build
     @comments = @article.comments
+    @profile = @article.user.profile
   end
 
   def edit

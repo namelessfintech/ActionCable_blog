@@ -2,17 +2,28 @@
 
 <!-- In order to use the grid we must wrap everything inside of a row -->
   <div class="row">
-      <div class="col-md-4 text-right">
+      <div class="col-md-2 text-right">
       <%= image_tag(@user.profile.avatar_url(:thumb).to_s, class:"img-circle") %>
 
       </div>
-    <div class="col-md-8 text-left">
+
+    <div class="col-md-8 off-set 2 text-left">
 
       <h1> Name: <%= @user.profile.first_name %>
          <%= @user.profile.last_name %></h1>
 
          <div class="well">
           <strong>Bio: </strong> <%= @user.profile.bio %></p>
+         </div>
+
+         <hr>
+
+         <div class="well">
+          <h2>Potential friends</h2>
+          <% @users.each do |user| %>
+            <%= link_to user.email, user_profile_path(user.id) %> <br>
+          <% end %>
+
          </div>
 
      </div>
