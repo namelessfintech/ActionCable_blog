@@ -35,6 +35,9 @@ class User < ApplicationRecord
     friends.delete(other_user)
   end
 
+  def get_feed
+    @articles = Article.where(user_id: get_all_friends_ids)
+  end
 
   def friendship(user)
     friendship = Friendship.where("(user_id = ? AND friend_id = ?) OR (user_id = ? AND friend_id = ?)",
@@ -44,5 +47,14 @@ class User < ApplicationRecord
   # Returns true if the current user is friends with the other user.
   def friends?(other_user)
     all_friends.include?(other_user)
+  end
+
+  private
+  def get_all_friends_ids
+    ids = [self.id]
+    self.all_friends.each do |friend|
+      ids << friend.id
+    end
+    ids
   end
 end
