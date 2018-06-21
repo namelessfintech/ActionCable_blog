@@ -8,10 +8,9 @@
 </div>
 
     <div class="">
+      <%= "Category".pluralize(@article.categories.count)+":" unless @article.categories.empty? %>
       <% @article.categories.each do |category| %>
         <span><%= link_to category.name, category_path(category) %></span>
-      <% end.empty? and begin%>
-        <p>Not categorized</p>
       <% end %>
     </div>
     <br>
