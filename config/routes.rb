@@ -5,6 +5,9 @@ Rails.application.routes.draw do
 
   get "categories/:id", to: "categories#show", as: "category"
 
+  post "friend", to: "friendships#friend", as: "friend"
+  delete "unfriend", to: "friendships#unfriend", as: "unfriend"
+
   resources :users do
     resource :profile
   end

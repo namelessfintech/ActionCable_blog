@@ -35,6 +35,12 @@ class User < ApplicationRecord
     friends.delete(other_user)
   end
 
+
+  def friendship(user)
+    friendship = Friendship.where("(user_id = ? AND friend_id = ?) OR (user_id = ? AND friend_id = ?)",
+      user.id, self.id, self.id, user.id).first
+  end
+
   # Returns true if the current user is friends with the other user.
   def friends?(other_user)
     all_friends.include?(other_user)

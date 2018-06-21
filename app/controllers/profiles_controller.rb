@@ -24,7 +24,7 @@ class ProfilesController < ApplicationController
 
   def show
     @user = find_user
-    @users = User.all
+    @friends = @user.all_friends
   end
 
   def edit
