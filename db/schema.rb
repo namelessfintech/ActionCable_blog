@@ -33,12 +33,12 @@ ActiveRecord::Schema.define(version: 2018_06_21_213706) do
 
   create_table "messages", force: :cascade do |t|
     t.text "body"
-    t.integer "user_id"
+    t.integer "profile_id"
     t.integer "room_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["profile_id"], name: "index_messages_on_profile_id"
     t.index ["room_id"], name: "index_messages_on_room_id"
-    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "profiles", force: :cascade do |t|

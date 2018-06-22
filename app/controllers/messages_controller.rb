@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
 
   def create
     @message = current_user.profile.messages.build(message_params)
-    @mesage.room = current_room
+    @message.room = current_room
     @message.save
     redirect_to user_profile_path(current_user)
   end
