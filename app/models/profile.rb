@@ -1,6 +1,8 @@
 class Profile < ApplicationRecord
   belongs_to :user, :dependent => :destroy
   mount_uploader :avatar, AvatarUploader
+  has_one :room
+  has_many :messages
 
   after_create :create_chatroom
 

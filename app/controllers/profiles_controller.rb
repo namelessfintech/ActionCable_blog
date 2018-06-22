@@ -1,3 +1,5 @@
+
+
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
   before_action :only_current_user
@@ -25,6 +27,10 @@ class ProfilesController < ApplicationController
   def show
     @user = find_user
     @users = User.all
+    set_current_room
+    @message = Message.new
+    @messages = current_room.messages if current_room
+    # @friends = Friends.where(friend_id: current_user.id)
   end
 
   def edit
@@ -49,6 +55,16 @@ class ProfilesController < ApplicationController
   def only_current_user
     @user = find_user
     redirect_to(root_path) unless @user == current_user
+  end
+
+  def set_current_room
+       # @room = current_user.profile.room
+    if params[:room_id]
+      @room = Room.find_by(id: params[:room_id])
+    else
+      @room = current_user.profile.room #this line of code may be my issue
+    end
+    session[:current_room] = @room.id if @room
   end
 
   def find_user

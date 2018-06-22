@@ -23,7 +23,26 @@
           <% @users.each do |user| %>
             <%= link_to user.email, user_profile_path(user.id) %> <br>
           <% end %>
+         </div>
 
+         <div class="well">
+          <div id=chat-window>
+            <header> <%= current_room.profile.first_name  %> </header>
+
+            <div id="chat-box" data-channel="rooms" data-room-id=<%= current_room.id %>>
+              <% @messages.each do |message| %>
+                <%= render partial: 'shared/message', locals: {message:message} %>
+              <% end %>
+            </div>
+
+            <div id= "form-box">
+              <%= form_for @message do |f| %>
+                <%= f.text_field :body, id:'message-field', class: 'form-control pull-left'%>
+                <%= f.submit 'Post', class: 'btn btn-default', id:'post-btn'%>
+
+              <% end %>
+            </div>
+          </div>
          </div>
 
      </div>

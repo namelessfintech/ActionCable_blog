@@ -11,5 +11,7 @@ Rails.application.routes.draw do
     resources :comments
   end
 
+  resources :messages, only:[:create]
+
   mount ActionCable.server => '/cable'
 end
