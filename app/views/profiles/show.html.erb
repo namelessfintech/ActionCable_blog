@@ -50,8 +50,9 @@
             <header> <%= current_room.profile.full_name  %>'s Chat </header>
 
           <div class="col-md-2">
-
-
+            <% @friends.each do |friend| %>
+                <%= link_to friend.profile.name, user_profile_path(current_user, roomId: friend.profile.room.id), class: 'friends' %>
+              <% end %>
             <br>
           </div>
 
