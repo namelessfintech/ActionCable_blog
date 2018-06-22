@@ -1,0 +1,19 @@
+<div class="container">
+  <h2>All Profiles</h2>
+
+  <h3>Search By name:</h3>
+
+  <%= form_tag profiles_path, method: :get do %>
+  <%= text_field_tag :name %>
+  <%= submit_tag 'Search' %>
+  <% end %>
+
+  <ul>
+    <% @profiles.each do |profile| %>
+    <li>
+      <%= link_to profile.name, user_profile_path(profile) %>
+    </li>
+    <br>
+    <% end %>
+  </ul>
+</div>

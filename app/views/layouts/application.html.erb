@@ -21,29 +21,27 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to "Hello, Memo", root_path, class:"navbar-brand" %>
+      <%= link_to "Meaning", root_path, class:"navbar-brand" %>
     </div>
     <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
 
         <% if user_signed_in? %>
-          <li><%= link_to "Sign out",destroy_user_session_path, method: :delete %></li>
             <% unless current_user.profile %>
               <li class="active"><%= link_to " Your Profile", new_user_profile_path(current_user) if current_user %></li>
               <% else %>
               <li><%= link_to "Edit Profile", edit_user_profile_path(current_user) if current_user %></li>
               <li ><%= link_to "Your Space", user_profile_path(current_user) if current_user %></li>
-
               <% end %>
+              <p class="navbar-text">
+                 <%= "Hello, #{current_user.email}" %>
+                <%= button_to "Sign out", destroy_user_session_path, class: "btn btn-light", method: :delete %>
+              </p>
         <% else %>
-        <li ><%= link_to "Sign up", new_user_registration_path %></li>
-        <li ><%= link_to "Sign in", new_user_session_path %></li>
+          <li ><%= link_to "Sign up", new_user_registration_path %></li>
+          <li ><%= link_to "Sign in", new_user_session_path %></li>
         <% end %>
-        <% if user_signed_in? %>
-          <p class="navbar-text">
-            Signed in as <%= "#{current_user.email}" %>
-          </p>
-        <% end %>
+
       </ul>
     </div>
 

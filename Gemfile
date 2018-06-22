@@ -17,7 +17,7 @@ gem 'pry'
 gem 'devise'
 
 gem 'bootstrap-sass'
-
+gem 'faker'
 gem 'carrierwave'
 
 gem 'mini_magick'

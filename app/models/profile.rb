@@ -17,4 +17,7 @@ class Profile < ApplicationRecord
     Room.create(name: hyphenated_username, profile_id: self.id)
   end
 
+  def name
+    "#{self.first_name} #{self.last_name}".strip
+  end
 end

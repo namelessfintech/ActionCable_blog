@@ -2,10 +2,20 @@
 
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
-  before_action :only_current_user
+  # before_action :only_current_user
 
   def index
-    @users = User.all
+    if params[:name] && params[:name] != ""
+      names = params[:name].split(" ")
+      f_name = "%#{names.first}%"
+      l_name = "%#{names.last}%"
+      @profiles = Profile.where("first_name LIKE ? OR last_name LIKE ?", f_name, l_name)
+      if @profiles.count == 1
+        redirect_to user_profile_path(@profiles.first)
+      end
+    else
+      @profiles = Profile.all
+    end
   end
 
   def new
@@ -30,7 +40,9 @@ class ProfilesController < ApplicationController
     set_current_room
     @message = Message.new
     @messages = current_room.messages if current_room
-    # @friends = Friends.where(friend_id: current_user.id)
+    @friends = @user.all_friends
+    @articles = current_user.get_feed
+    @articles = @user.articles if @articles.empty?
   end
 
   def edit
@@ -72,7 +84,7 @@ class ProfilesController < ApplicationController
   end
 
   def set_params
-    params.require(:profile).permit(:first_name,:last_name,:bio,:avatar)
+    params.require(:profile).permit(:first_name, :last_name, :bio, :avatar)
   end
 
 end

@@ -9,6 +9,9 @@ class ArticlesController < ApplicationController
 
   def new
     @article = Article.new
+    @article.categories.build
+    @article.categories.build
+    @article.categories.build
   end
 
   def create
@@ -70,7 +73,7 @@ class ArticlesController < ApplicationController
   private
 
   def article_params
-    params.require(:article).permit(:title, :body)
+    params.require(:article).permit(:title, :body, categories_attributes: [:name])
 
   end
 

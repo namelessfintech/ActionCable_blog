@@ -3,15 +3,29 @@
 <!-- In order to use the grid we must wrap everything inside of a row -->
   <div class="row">
       <div class="col-md-2 text-right">
-      <%= image_tag(@user.profile.avatar_url(:thumb).to_s, class:"img-circle") %>
-
+        <% if @user.profile && @user.profile.avatar %>
+          <%= image_tag(@user.profile.avatar_url(:thumb).to_s, class:"img-circle") %>
+        <% end %>
+        <br>
       </div>
 
     <div class="col-md-8 off-set 2 text-left">
 
       <h1> Name: <%= @user.profile.first_name %>
          <%= @user.profile.last_name %></h1>
+         <% unless @user == current_user %>
+            <% unless current_user.friends?(@user) %>
+              <!-- <button type="button" name="button">Add Friend</button> -->
+              <!-- <%= link_to "Add Friend", friend_path(@user) %> -->
+              <%= button_to "Add Friend", friend_path(@user), :method => :post %>
+            <% else %>
+            <!-- <%= link_to "Unfriend", unfriend_path(@user) %> -->
+            <%= button_to "Unfriend", unfriend_path(@user), :method => :delete %>
 
+              <!-- <button type="button" name="button">Unfriend</button> -->
+            <% end %>
+            <br><br>
+         <% end %>
          <div class="well">
           <strong>Bio: </strong> <%= @user.profile.bio %></p>
          </div>
@@ -19,38 +33,46 @@
          <hr>
 
          <div class="well">
-          <h2>Potential friends</h2>
-          <% @users.each do |user| %>
-            <%= link_to user.email, user_profile_path(user.id) %> <br>
+          <h2>Friends</h2>
+          Want to make new friends? <%= link_to "Click Here", profiles_path %>.
+          <br>
+          <% @friends.each do |user| %>
+            <%= link_to user.profile.name, user_profile_path(user.id) %> <br>
           <% end %>
          </div>
 
+        </div>
+
          <div class="well">
-          <div id=chat-window>
-            <header> <%= current_room.profile.full_name  %>'s Chat </header>
+           <%= render '/feed/index' %>
+        </div>
 
-          <div class="col-md-2">
-          
+        <div class="well">
+         <div id=chat-window>
+           <header> <%= current_room.profile.full_name  %>'s Chat </header>
 
-            <br>
-          </div>
+         <div class="col-md-2">
 
-            <div id="chat-box" data-channel="rooms" data-room-id=<%= current_room.id %>>
-              <% @messages.each do |message| %>
-                  <br>
-                <%= render partial: 'shared/message', locals: {message:message} %>
-              <% end %>
-            </div>
 
-            <div id= "form-box">
-              <%= form_for @message do |f| %>
-                <%= f.text_field :body, id:'message-field', class: 'form-control pull-left'%>
-                <%= f.submit 'Post', class: 'btn btn-default', id:'post-btn'%>
-
-              <% end %>
-            </div>
-          </div>
+           <br>
          </div>
+
+           <div id="chat-box" data-channel="rooms" data-room-id=<%= current_room.id %>>
+             <% @messages.each do |message| %>
+                 <br>
+               <%= render partial: 'shared/message', locals: {message:message} %>
+             <% end %>
+           </div>
+
+           <div id= "form-box">
+             <%= form_for @message do |f| %>
+               <%= f.text_field :body, id:'message-field', class: 'form-control pull-left'%>
+               <%= f.submit 'Post', class: 'btn btn-default', id:'post-btn'%>
+
+             <% end %>
+           </div>
+         </div>
+        </div>
 
      </div>
    </div>

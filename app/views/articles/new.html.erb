@@ -34,6 +34,20 @@
               <%= f.text_field :title, class: 'form-control', placeholder:'Name of Memo', autofocus: true %>
             </div>
           </div>
+
+
+          <%= f.fields_for :categories do |cat| %>
+          <div class="form-group">
+            <div class="control-label col-md-1">
+              <%= cat.label :name, "Category" %>
+            </div>
+            <div class="col-md-11">
+              <%= cat.text_field :name, class: 'form-control', placeholder:'Name of Category', autofocus: true %><br>
+            </div>
+          </div>
+
+          <% end %>
+
           <div class="form-group">
             <div class="control-label col-md-1">
               <%= f.label :body %>
