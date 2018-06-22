@@ -1,3 +1,4 @@
+require 'faker'
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -6,6 +7,7 @@ class User < ApplicationRecord
   # before_save {self.email = email.downcase}
   has_many :articles
   has_one :profile
+  after_create :setup_profile
   # validates :name, length:{maximum:20}
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true,length:{maximum: 64},
@@ -50,6 +52,10 @@ class User < ApplicationRecord
   end
 
   private
+  def setup_profile
+    self.profile = Profile.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, bio: Faker::Lorem.paragraphs(4).join("\n"), user_id: self.id, avatar: Faker::Avatar.image)
+  end
+  
   def get_all_friends_ids
     ids = [self.id]
     self.all_friends.each do |friend|

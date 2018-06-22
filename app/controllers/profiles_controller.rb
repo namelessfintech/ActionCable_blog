@@ -35,6 +35,8 @@ class ProfilesController < ApplicationController
   def show
     @user = find_user
     @friends = @user.all_friends
+    @articles = current_user.get_feed
+    @articles = @user.articles if @articles.empty?
   end
 
   def edit
@@ -66,7 +68,7 @@ class ProfilesController < ApplicationController
   end
 
   def set_params
-    params.require(:profile).permit(:first_name,:last_name,:bio,:avatar)
+    params.require(:profile).permit(:first_name, :last_name, :bio, :avatar)
   end
 
 end

@@ -15,7 +15,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'devise'
 
 gem 'bootstrap-sass'
-
+gem 'faker'
 gem 'carrierwave'
 
 gem 'mini_magick'

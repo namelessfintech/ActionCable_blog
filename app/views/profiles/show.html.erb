@@ -34,10 +34,16 @@
 
          <div class="well">
           <h2>Friends</h2>
+          Want to make new friends? <%= link_to "Click Here", profiles_path %>.
+          <br>
           <% @friends.each do |user| %>
             <%= link_to user.profile.name, user_profile_path(user.id) %> <br>
           <% end %>
 
+        </div>
+
+         <div class="well">
+           <%= render '/feed/index' %>
         </div>
 
      </div>
