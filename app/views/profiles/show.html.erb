@@ -41,36 +41,39 @@
           <% end %>
          </div>
 
-        </div>
-
          <div class="well">
            <%= render '/feed/index' %>
-        </div>
-
-        <div class="well">
-         <div id=chat-window>
-           <header> <%= current_room.profile.full_name  %>'s Chat </header>
-
-         <div class="col-md-2">
-
-
-           <br>
          </div>
 
-           <div id="chat-box" data-channel="rooms" data-room-id=<%= current_room.id %>>
-             <% @messages.each do |message| %>
-                 <br>
-               <%= render partial: 'shared/message', locals: {message:message} %>
-             <% end %>
-           </div>
+         <div class="well">
+          <div id=chat-window>
+            <header> <%= current_room.profile.full_name  %>'s Chat </header>
 
-           <div id= "form-box">
-             <%= form_for @message do |f| %>
-               <%= f.text_field :body, id:'message-field', class: 'form-control pull-left'%>
-               <%= f.submit 'Post', class: 'btn btn-default', id:'post-btn'%>
+          <div class="col-md-2">
 
-             <% end %>
-           </div>
+
+            <br>
+          </div>
+
+            <div id="chat-box" data-channel="rooms" data-room-id=<%= current_room.id %>>
+              <% @messages.each do |message| %>
+                  <br>
+                <%= render partial: 'shared/message', locals: {message:message} %>
+              <% end %>
+            </div>
+
+            <div id= "form-box">
+              <%= form_for @message do |f| %>
+                <%= f.text_field :body, id:'message-field', class: 'form-control pull-left'%>
+                <%= f.submit 'Post', class: 'btn btn-default', id:'post-btn'%>
+
+              <% end %>
+            </div>
+
+        </div>
+
+
+
          </div>
         </div>
 

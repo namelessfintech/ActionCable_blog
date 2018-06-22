@@ -10,14 +10,13 @@ class Profile < ApplicationRecord
     "#{self.first_name}" + " " + "#{self.last_name}"
   end
 
-  private
+  def name
+    "#{self.first_name} #{self.last_name}".strip
+  end
 
+  private
   def create_chatroom
     hyphenated_username = self.full_name.split.join("-")
     Room.create(name: hyphenated_username, profile_id: self.id)
-  end
-
-  def name
-    "#{self.first_name} #{self.last_name}".strip
   end
 end
